@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vine & Vector Toolkit</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #faf6f2;
+  color: #1f1f1f;
+}
+
+/* header */
+header {
+  padding: 40px 20px 10px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+h1 {
+  margin: 0;
+  font-size: 34px;
+}
+
+p {
+  opacity: 0.6;
+}
+
+/* layout */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* category block */
+.category {
+  margin: 50px 0;
+}
+
+/* category label pill */
+.label {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+/* grids */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+/* tool card */
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.08);
+  transition: 0.2s ease;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+/* logo */
+.card img {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+}
+
+/* text */
+.card a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #111;
+  display: block;
+}
+
+.card span {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+/* category colors */
+.ai { background:#dbeafe; }
+.design { background:#ffe4ec; }
+.dev { background:#d1fae5; }
+.audio { background:#fef3c7; }
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>📒 Vine & Vector Toolkit</h1>
+  <p>A curated creative resource library for designers & creators</p>
+</header>
+
+<div class="container">
+
+<!-- 🌐 AI -->
+<div class="category">
+<div class="label ai">🌐 Generative AI</div>
+
+<div class="grid">
+
+<div class="card">
+<img src="https://www.google.com/s2/favicons?domain=firefly.adobe.com&sz=64"/>
+<div>
+<a href="https://firefly.adobe.com">Adobe Firefly</a>
+<span>Image generation</span>
+</div>
+</div>
+
+<div class="card">
+<img src="https://www.google.com/s2/favicons?domain=runwayml.com&sz=64"/>
+<div>
+<a href="https://runwayml.com">Runway</a>
+<span>Video AI tools</span>
+</div>
+</div>
+
+<div class="card">
+<img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=64"/>
+<div>
+<a href="https://claude.ai">Claude</a>
+<span>AI writing assistant</span>
+</div>
+</div>
+
+<div class="card">
+<img src="https://www.google.com/s2/favicons?domain=perplexity.ai&sz=64"/>
+<div>
+<a href="https://perplexity.ai">Perplexity</a>
+<span>AI research engine</span>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- 🎨 DESIGN -->
+<div class="category">
+<div class="label design">🎨 Design & Branding</div>
+
+<div class="grid">
+
+<div class="card">
+<img src="https://www.google.com/s2/favicons?domain=fonts.google.com&sz=64"/>
+<div>
+<a href="https://fonts.google.com">Google Fonts</a>
+<span>Typography library</span>
+</div>
+</div>
+
+<div class="card">
+<img src="https://www.google.com/s2/favicons?domain=bpando.org&sz=64"/>
+<div>
+<a href="https://bpando.org">BP&O</a>
+<span>Brand inspiration</span>
+</div>
+</div>
+
+<div class="card">
+<img src="https://www.google.com/s2/favicons?domain=logolounge.com&sz=64"/>
+<div>
+<a href="https://logolounge.com">LogoLounge</a>
+<span>Logo archive</span>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- 💻 DEV -->
+<div class="category">
+<div class="label dev">💻 Dev Tools</div>
+
+<div class="grid">
+
+<div class="card">
+<img src="https://www.google.com/s2/favicons?domain=codepen.io&sz=64"/>
+<div>
+<a href="https://codepen.io">CodePen</a>
+<span>Frontend playground</span>
+</div>
+</div>
+
+<div class="card">
+<img src="https://www.google.com/s2/favicons?domain=replit.com&sz=64"/>
+<div>
+<a href="https://replit.com">Replit</a>
+<span>Online coding</span>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>
