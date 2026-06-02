@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vine & Vector – Creative Hub</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #fff8f3;
+  overflow: hidden;
+}
+
+/* paper grid */
+.paper {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(#e8e8e8 1px, transparent 1px),
+    linear-gradient(90deg, #e8e8e8 1px, transparent 1px);
+  background-size: 26px 26px;
+  opacity: 0.6;
+  z-index: 0;
+}
+
+/* header */
+.header {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 5;
+}
+
+h1 {
+  margin: 0;
+  font-size: 30px;
+}
+
+p {
+  margin: 4px 0 0;
+  opacity: 0.6;
+}
+
+/* sticky note */
+.note {
+  position: absolute;
+  width: 260px;
+  padding: 14px;
+  border-radius: 16px;
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.12);
+  cursor: grab;
+  z-index: 2;
+}
+
+.note:active {
+  cursor: grabbing;
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.link {
+  display: inline-block;
+  font-size: 12px;
+  margin: 3px;
+  padding: 4px 8px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 10px;
+  text-decoration: none;
+  color: #222;
+}
+</style>
+</head>
+
+<body>
+
+<div class="paper"></div>
+
+<div class="header">
+  <h1>📒 Vine & Vector</h1>
+  <p>your creative web toolbox</p>
+</div>
+
+<!-- 🌐 GENERATIVE AI -->
+<div class="note" style="top:110px; left:60px; background:#cfe8ff;" onmousedown="drag(event)">
+<div class="title">🌐 Generative AI</div>
+<a class="link" href="https://firefly.adobe.com" target="_blank">Firefly</a>
+<a class="link" href="https://runwayml.com" target="_blank">Runway</a>
+<a class="link" href="https://pika.art" target="_blank">Pika</a>
+<a class="link" href="https://leonardo.ai" target="_blank">Leonardo</a>
+<a class="link" href="https://openai.com/dall-e" target="_blank">DALL·E</a>
+</div>
+
+<!-- 🎬 VIDEO / MOTION -->
+<div class="note" style="top:140px; left:360px; background:#ffd6e7;" onmousedown="drag(event)">
+<div class="title">🎬 Video / Motion</div>
+<a class="link" href="https://runwayml.com" target="_blank">Runway</a>
+<a class="link" href="https://pika.art" target="_blank">Pika</a>
+<a class="link" href="https://lumalabs.ai" target="_blank">Luma AI</a>
+<a class="link" href="https://www.synthesia.io" target="_blank">Synthesia</a>
+</div>
+
+<!-- 🎧 AUDIO -->
+<div class="note" style="top:300px; left:120px; background:#d7f7c8;" onmousedown="drag(event)">
+<div class="title">🎧 Audio / Music AI</div>
+<a class="link" href="https://elevenlabs.io" target="_blank">ElevenLabs</a>
+<a class="link" href="https://suno.com" target="_blank">Suno</a>
+<a class="link" href="https://udio.com" target="_blank">Udio</a>
+<a class="link" href="https://vocalremover.org" target="_blank">Vocal Remover</a>
+</div>
+
+<!-- 🎨 DESIGN -->
+<div class="note" style="top:320px; left:420px; background:#ffe7b8;" onmousedown="drag(event)">
+<div class="title">🎨 Design + Branding</div>
+<a class="link" href="https://bpando.org" target="_blank">BP&O</a>
+<a class="link" href="https://identitydesigned.com" target="_blank">Identity Designed</a>
+<a class="link" href="https://logolounge.com" target="_blank">LogoLounge</a>
+<a class="link" href="https://fonts.google.com" target="_blank">Google Fonts</a>
+</div>
+
+<!-- 🧱 ASSETS -->
+<div class="note" style="top:500px; left:90px; background:#e6d6ff;" onmousedown="drag(event)">
+<div class="title">🧱 Assets + Templates</div>
+<a class="link" href="https://unsplash.com" target="_blank">Unsplash</a>
+<a class="link" href="https://pixabay.com" target="_blank">Pixabay</a>
+<a class="link" href="https://freepik.com" target="_blank">Freepik</a>
+<a class="link" href="https://figma.com/community" target="_blank">Figma</a>
+</div>
+
+<!-- 💻 DEV -->
+<div class="note" style="top:520px; left:450px; background:#c9f0ff;" onmousedown="drag(event)">
+<div class="title">💻 Web + Dev Tools</div>
+<a class="link" href="https://codepen.io" target="_blank">CodePen</a>
+<a class="link" href="https://replit.com" target="_blank">Replit</a>
+<a class="link" href="https://stackblitz.com" target="_blank">StackBlitz</a>
+<a class="link" href="https://figma.com" target="_blank">Figma</a>
+</div>
+
+<script>
+let active = null;
+let offsetX = 0;
+let offsetY = 0;
+
+function drag(e) {
+  active = e.currentTarget;
+  offsetX = e.clientX - active.offsetLeft;
+  offsetY = e.clientY - active.offsetTop;
+
+  document.onmousemove = move;
+  document.onmouseup = stop;
+}
+
+function move(e) {
+  if (!active) return;
+  active.style.left = (e.clientX - offsetX) + "px";
+  active.style.top = (e.clientY - offsetY) + "px";
+}
+
+function stop() {
+  active = null;
+  document.onmousemove = null;
+  document.onmouseup = null;
+}
+</script>
+
+</body>
+</html>
