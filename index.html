@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vine & Vector Infinite Board</title>
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background: #fdf6f1;
+}
+
+/* 🌐 canvas (infinite space) */
+#canvas {
+  width: 3000px;
+  height: 3000px;
+  position: absolute;
+  transform-origin: 0 0;
+  background:
+    radial-gradient(#ddd 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* viewport */
+#viewport {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  cursor: grab;
+}
+
+#viewport:active {
+  cursor: grabbing;
+}
+
+/* sticky notes */
+.note {
+  position: absolute;
+  width: 260px;
+  padding: 14px;
+  border-radius: 16px;
+  box-shadow: 10px 10px 0 rgba(0,0,0,0.08);
+  cursor: grab;
+  user-select: none;
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+a {
+  display: inline-block;
+  font-size: 12px;
+  margin: 3px;
+  padding: 5px 8px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.8);
+  text-decoration: none;
+  color: #222;
+}
+
+/* header */
+.header {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 10;
+  background: white;
+  padding: 10px 12px;
+  border-radius: 12px;
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.08);
+  font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">📒 Vine & Vector — Infinite Board (drag + zoom)</div>
+
+<div id="viewport">
+  <div id="canvas">
+
+    <!-- 🌐 AI -->
+    <div class="note" style="top:200px; left:300px; background:#cfe8ff;">
+      <div class="title">🌐 Generative AI</div>
+      <a href="https://firefly.adobe.com" target="_blank">Firefly</a>
+      <a href="https://runwayml.com" target="_blank">Runway</a>
+      <a href="https://pika.art" target="_blank">Pika</a>
+      <a href="https://claude.ai" target="_blank">Claude</a>
+      <a href="https://perplexity.ai" target="_blank">Perplexity</a>
+    </div>
+
+    <!-- 🎨 DESIGN -->
+    <div class="note" style="top:600px; left:900px; background:#ffd6e7;">
+      <div class="title">🎨 Design + Branding</div>
+      <a href="https://bpando.org">BP&O</a>
+      <a href="https://identitydesigned.com">Identity Designed</a>
+      <a href="https://logolounge.com">LogoLounge</a>
+      <a href="https://fonts.google.com">Google Fonts</a>
+    </div>
+
+    <!-- 🎬 VIDEO -->
+    <div class="note" style="top:1200px; left:500px; background:#d7f7c8;">
+      <div class="title">🎬 Video / Motion</div>
+      <a href="https://runwayml.com">Runway</a>
+      <a href="https://pika.art">Pika</a>
+      <a href="https://lumalabs.ai">Luma AI</a>
+    </div>
+
+    <!-- 🎧 AUDIO -->
+    <div class="note" style="top:1600px; left:1300px; background:#ffe7b8;">
+      <div class="title">🎧 Audio</div>
+      <a href="https://elevenlabs.io">ElevenLabs</a>
+      <a href="https://suno.com">Suno</a>
+      <a href="https://udio.com">Udio</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+let scale = 1;
+let offsetX = 0;
+let offsetY = 0;
+
+const viewport = document.getElementById("viewport");
+const canvas = document.getElementById("canvas");
+
+/* 🌍 PAN (Figma-style background drag) */
+let isPanning = false;
+let startX, startY;
+
+viewport.addEventListener("mousedown", (e) => {
+  if (e.target.classList.contains("note")) return;
+  isPanning = true;
+  startX = e.clientX - offsetX;
+  startY = e.clientY - offsetY;
+});
+
+window.addEventListener("mousemove", (e) => {
+  if (!isPanning) return;
+  offsetX = e.clientX - startX;
+  offsetY = e.clientY - startY;
+  updateCanvas();
+});
+
+window.addEventListener("mouseup", () => {
+  isPanning = false;
+});
+
+function updateCanvas() {
+  canvas.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+}
+
+/* 🔍 ZOOM */
+window.addEventListener("wheel", (e) => {
+  e.preventDefault();
+  scale += e.deltaY * -0.001;
+  scale = Math.min(Math.max(0.5, scale), 2);
+  updateCanvas();
+}, { passive: false });
+
+/* 📌 DRAG NOTES */
+let active = null;
+let offsetNoteX = 0;
+let offsetNoteY = 0;
+
+document.querySelectorAll(".note").forEach(note => {
+  note.onmousedown = (e) => {
+    active = note;
+    offsetNoteX = e.clientX - note.offsetLeft;
+    offsetNoteY = e.clientY - note.offsetTop;
+  };
+});
+
+window.addEventListener("mousemove", (e) => {
+  if (!active) return;
+  active.style.left = (e.clientX - offsetNoteX) + "px";
+  active.style.top = (e.clientY - offsetNoteY) + "px";
+});
+
+window.addEventListener("mouseup", () => {
+  active = null;
+});
+</script>
+
+</body>
+</html>
